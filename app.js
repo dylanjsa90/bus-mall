@@ -1,9 +1,8 @@
+var files = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck',
+'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+
 var productArray = [];
 var container = document.getElementById('container');
-var bag = new Product('bag', 'bag.jpg');
-var banana = new Product('banana', 'banana.jpg');
-var bathroom = new Product('bathroom', 'bathroom.jpg');
-var boots = new Product('boots', 'boots.jpg');
 
 function Product(name, path) {
   this.name = name;
@@ -22,15 +21,15 @@ function handleProductClick(event) {
   console.log(event);
   var imageNum = imageIndex(0, productArray.length - 1);
   var imgEl = document.createElement('img');
-  imgEl.src = 'img/' + productArray[imageNum].path;
+  imgEl.src = productArray[imageNum].path;
   container.appendChild(imgEl);
   var imageNum = imageIndex(0, productArray.length - 1);
   var imgEl = document.createElement('img');
-  imgEl.src = 'img/' + productArray[imageNum].path;
+  imgEl.src = productArray[imageNum].path;
   container.appendChild(imgEl);
   var imageNum = imageIndex(0, productArray.length - 1);
   var imgEl = document.createElement('img');
-  imgEl.src = 'img/' + productArray[imageNum].path;
+  imgEl.src = productArray[imageNum].path;
   container.appendChild(imgEl);
 }
 
@@ -38,17 +37,20 @@ function onload() {
   console.log(productArray);
   var imageNum = imageIndex(0, productArray.length - 1);
   var imgEl = document.createElement('img');
-  imgEl.src = 'img/' + productArray[imageNum].path;
+  imgEl.src = productArray[imageNum].path;
   container.appendChild(imgEl);
   var imageNum = imageIndex(0, productArray.length - 1);
   var imgEl = document.createElement('img');
-  imgEl.src = 'img/' + productArray[imageNum].path;
+  imgEl.src = productArray[imageNum].path;
   container.appendChild(imgEl);
   var imageNum = imageIndex(0, productArray.length - 1);
   var imgEl = document.createElement('img');
-  imgEl.src = 'img/' + productArray[imageNum].path;
+  imgEl.src = productArray[imageNum].path;
   container.appendChild(imgEl);
   // container.innerHTML = '';
+}
+for (var i = 0; i < 20; i++) {
+  productArray[i] = new Product(files[i], 'img/' + files[i] + '.jpg');
 }
 
 container.addEventListener('click', handleProductClick);
