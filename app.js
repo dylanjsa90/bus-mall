@@ -1,5 +1,6 @@
 var files = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck',
 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+var totalClicks = 0;
 
 var productArray = [];
 var container = document.getElementById('container');
@@ -25,39 +26,42 @@ function imageIndex(min, max) {
 }
 
 function handleProductClick(event) {
-  var rollIndex = [];
-  container.innerHTML = '';
-  rollIndex[0] = imageIndex(0, productArray.length - 1);
-  console.log(event.target);
-  var imgID = event.target;
-  console.log(event);
-  rollIndex[0] = imageIndex(0, productArray.length - 1);
-  productArray[rollIndex[0]].addDisplay();
-  appendImg(rollIndex[0]);
-  var index = imageIndex(0, productArray.length - 1);
-  var notRepeat = false;
-  while (notRepeat !== true) {
-    if (index !== rollIndex[0]) {
-      notRepeat = true;
-      rollIndex[1] = index;
-      productArray[index].addDisplay();
-      appendImg(index);
-    } else {
-      index = imageIndex(0, productArray.length - 1);
+  if (totalClicks <= 25) {
+    var rollIndex = [];
+    totalClicks += 1;
+    container.innerHTML = '';
+    rollIndex[0] = imageIndex(0, productArray.length - 1);
+    console.log(event.target);
+    var imgID = event.target;
+    console.log(event);
+    rollIndex[0] = imageIndex(0, productArray.length - 1);
+    productArray[rollIndex[0]].addDisplay();
+    appendImg(rollIndex[0]);
+    var index = imageIndex(0, productArray.length - 1);
+    var notRepeat = false;
+    while (notRepeat !== true) {
+      if (index !== rollIndex[0]) {
+        notRepeat = true;
+        rollIndex[1] = index;
+        productArray[index].addDisplay();
+        appendImg(index);
+      } else {
+        index = imageIndex(0, productArray.length - 1);
+      }
     }
-  }
-  notRepeat = false;
-  index = imageIndex(0, productArray.length - 1);
-  while (notRepeat !== true) {
-    if (index !== rollIndex[0] && index !== rollIndex[1]) {
-      notRepeat = true;
-      rollIndex[2] = index;
-      appendImg(index);
-    } else {
-      index = imageIndex(0, productArray.length - 1);
+    notRepeat = false;
+    index = imageIndex(0, productArray.length - 1);
+    while (notRepeat !== true) {
+      if (index !== rollIndex[0] && index !== rollIndex[1]) {
+        notRepeat = true;
+        rollIndex[2] = index;
+        appendImg(index);
+      } else {
+        index = imageIndex(0, productArray.length - 1);
+      }
     }
+    productArray[event.target.id].addClick();
   }
-  productArray[event.target.id].addClick();
 }
 
 function appendImg(num) {
