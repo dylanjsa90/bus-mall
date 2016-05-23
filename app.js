@@ -4,12 +4,20 @@ var files = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'ch
 var productArray = [];
 var container = document.getElementById('container');
 
-function Product(name, path) {
-  this.name = name;
+function Product(productName, path) {
+  this.productName = productName;
   this.path = path;
-  clicks = 0;
-  displayed = 0;
+  this.clicks = 0;
+  this.displayed = 0;
   productArray.push(this);
+};
+
+Product.prototype.addClick = function() {
+  this.clicks += 1;
+};
+
+Product.prototype.addDisplay = function() {
+  this.displayed += 1;
 };
 
 function imageIndex(min, max) {
@@ -17,37 +25,54 @@ function imageIndex(min, max) {
 }
 
 function handleProductClick(event) {
+  var rollIndex = [];
   container.innerHTML = '';
-  console.log(event);
-  var imageNum = imageIndex(0, productArray.length - 1);
+  rollIndex[0] = imageIndex(0, productArray.length - 1);
+  productArray[rollIndex[0]].addDisplay();
+  appendImg(rollIndex[0]);
+  var index = imageIndex(0, productArray.length - 1);
+  var notRepeat = false;
+  while (notRepeat !== true) {
+    if (index !== rollIndex[0]) {
+      notRepeat = true;
+      rollIndex[1] = index;
+      productArray[index].addDisplay();
+      appendImg(index);
+    } else {
+      index = imageIndex(0, productArray.length - 1);
+    }
+  }
+  notRepeat = false;
+  index = imageIndex(0, productArray.length - 1);
+  while (notRepeat !== true) {
+    if (index !== rollIndex[0] && index !== rollIndex[1]) {
+      notRepeat = true;
+      rollIndex[2] = index;
+      appendImg(index);
+    } else {
+      index = imageIndex(0, productArray.length - 1);
+    }
+  }
+
+  productArray[event.target.id].addClick();
+  console.log(event.target.id);
+}
+
+function appendImg(num) {
   var imgEl = document.createElement('img');
-  imgEl.src = productArray[imageNum].path;
-  container.appendChild(imgEl);
-  var imageNum = imageIndex(0, productArray.length - 1);
-  var imgEl = document.createElement('img');
-  imgEl.src = productArray[imageNum].path;
-  container.appendChild(imgEl);
-  var imageNum = imageIndex(0, productArray.length - 1);
-  var imgEl = document.createElement('img');
-  imgEl.src = productArray[imageNum].path;
+  imgEl.src = productArray[num].path;
+  imgEl.setAttribute('id', num);
   container.appendChild(imgEl);
 }
 
 function onload() {
   console.log(productArray);
   var imageNum = imageIndex(0, productArray.length - 1);
-  var imgEl = document.createElement('img');
-  imgEl.src = productArray[imageNum].path;
-  container.appendChild(imgEl);
+  appendImg(imageNum);
   var imageNum = imageIndex(0, productArray.length - 1);
-  var imgEl = document.createElement('img');
-  imgEl.src = productArray[imageNum].path;
-  container.appendChild(imgEl);
+  appendImg(imageNum);
   var imageNum = imageIndex(0, productArray.length - 1);
-  var imgEl = document.createElement('img');
-  imgEl.src = productArray[imageNum].path;
-  container.appendChild(imgEl);
-  // container.innerHTML = '';
+  appendImg(imageNum);  // container.innerHTML = '';
 }
 for (var i = 0; i < 20; i++) {
   productArray[i] = new Product(files[i], 'img/' + files[i] + '.jpg');
