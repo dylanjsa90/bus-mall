@@ -27,12 +27,11 @@ function imageIndex(min, max) {
 function handleProductClick(event) {
   var rollIndex = [];
   container.innerHTML = '';
+  rollIndex[0] = imageIndex(0, productArray.length - 1);
   console.log(event.target);
   var imgID = event.target;
-
   console.log(event);
   rollIndex[0] = imageIndex(0, productArray.length - 1);
-  // productArray[rollIndex[0]].addClick();
   productArray[rollIndex[0]].addDisplay();
   appendImg(rollIndex[0]);
   var index = imageIndex(0, productArray.length - 1);
@@ -58,17 +57,7 @@ function handleProductClick(event) {
       index = imageIndex(0, productArray.length - 1);
     }
   }
-
   productArray[event.target.id].addClick();
-  console.log(event.target.id);
-  // for (var i = 0; i < rollIndex.length; i++) {
-  //   var clickID = document.getElementById(event.target.id);
-  //   if (productArray[rollIndex[i]].productName === clickID) {
-  //     console.log(clickID);
-  //     console.log(productArray[i].productName);
-  //     productArray[i].addClick();
-  //   }
-  // }
 }
 
 function appendImg(num) {
