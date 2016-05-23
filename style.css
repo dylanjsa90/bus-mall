@@ -1,6 +1,10 @@
 body {
   background-color: grey;
+  text-align: center;
+}
 
+p {
+  font-size: 24px;
 }
 
 img {
