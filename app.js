@@ -1,91 +1,67 @@
 var files = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck',
 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var totalClicks = 0;
+var left = document.getElementById('left');
+var center = document.getElementById('center');
+var right = document.getElementById('right');
 
 var productArray = [];
 var container = document.getElementById('container');
 
 function Product(productName, path) {
   this.productName = productName;
-  this.path = path;
+  this.path = 'img/' + path + '.jpg';
   this.clicks = 0;
   this.displayed = 0;
   productArray.push(this);
 };
 
-Product.prototype.addClick = function() {
-  this.clicks += 1;
-};
-
-Product.prototype.addDisplay = function() {
-  this.displayed += 1;
-};
-
-function imageIndex(min, max) {
-  return (Math.floor(Math.random() * (max - min + 1)) + min);
+function randIndex(min, max) {
+  return (Math.floor(Math.random() * (max - min)) + min);
 }
 
 function handleProductClick(event) {
   console.log(event.target.id);
   if (event.target.id !== 'container') {
     if (totalClicks <= 25) {
-      var rollIndex = [];
+      displayProducts();
       totalClicks += 1;
-      container.innerHTML = '';
-      rollIndex[0] = imageIndex(0, productArray.length - 1);
-      console.log(event.target);
-      var imgID = event.target;
-      console.log(event);
-      rollIndex[0] = imageIndex(0, productArray.length - 1);
-      productArray[rollIndex[0]].addDisplay();
-      appendImg(rollIndex[0]);
-      var index = imageIndex(0, productArray.length - 1);
-      var notRepeat = false;
-      while (notRepeat !== true) {
-        if (index !== rollIndex[0]) {
-          notRepeat = true;
-          rollIndex[1] = index;
-          productArray[index].addDisplay();
-          appendImg(index);
-        } else {
-          index = imageIndex(0, productArray.length - 1);
+      // var imgID = event.target.id;
+      var selected = document.getElementById(event.target.id);
+      for (var i; i < productArray.length; i++) {
+        if (selected.src === productArray[i].path) {
+          productArray[i].clicks += 1;
         }
       }
-      notRepeat = false;
-      index = imageIndex(0, productArray.length - 1);
-      while (notRepeat !== true) {
-        if (index !== rollIndex[0] && index !== rollIndex[1]) {
-          notRepeat = true;
-          rollIndex[2] = index;
-          appendImg(index);
-        } else {
-          index = imageIndex(0, productArray.length - 1);
-        }
-      }
-      productArray[event.target.id].addClick();
     }
   }
 }
 
-function appendImg(num) {
-  var imgEl = document.createElement('img');
-  imgEl.src = productArray[num].path;
-  imgEl.setAttribute('id', num);
-  container.appendChild(imgEl);
+function displayProducts() {
+  var leftIndex = randIndex(0, productArray.length);
+  productArray[leftIndex].displayed += 1;
+  left.src = productArray[leftIndex].path;
+
+  var centerIndex = randIndex(0, productArray.length);
+  while (centerIndex === leftIndex) {
+    console.log('Duplicate found between center and left');
+    centerIndex = randIndex(0, productArray.length);
+  }
+  productArray[centerIndex].displayed += 1;
+  center.src = productArray[centerIndex].path;
+
+  var rightIndex = randIndex(0, productArray.length);
+  while (rightIndex === leftIndex || rightIndex === centerIndex) {
+    rightIndex = randIndex(0, productArray.length);
+  }
+  productArray[rightIndex].displayed += 1;
+  right.src = productArray[rightIndex].path;
+
 }
 
-function onload() {
-  console.log(productArray);
-  var imageNum = imageIndex(0, productArray.length - 1);
-  appendImg(imageNum);
-  var imageNum = imageIndex(0, productArray.length - 1);
-  appendImg(imageNum);
-  var imageNum = imageIndex(0, productArray.length - 1);
-  appendImg(imageNum);  // container.innerHTML = '';
-}
 for (var i = 0; i < 20; i++) {
-  productArray[i] = new Product(files[i], 'img/' + files[i] + '.jpg');
+  productArray[i] = new Product(files[i]);
 }
 
 container.addEventListener('click', handleProductClick);
-onload();
+displayProducts();
