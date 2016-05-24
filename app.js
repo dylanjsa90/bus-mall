@@ -41,6 +41,7 @@ function displayProducts() {
   var leftIndex = randIndex(0, productArray.length);
   productArray[leftIndex].displayed += 1;
   left.src = productArray[leftIndex].path;
+  left.alt = productArray[leftIndex].name;
 
   var centerIndex = randIndex(0, productArray.length);
   while (centerIndex === leftIndex) {
@@ -49,6 +50,8 @@ function displayProducts() {
   }
   productArray[centerIndex].displayed += 1;
   center.src = productArray[centerIndex].path;
+  center.alt = productArray[centerIndex].name;
+
 
   var rightIndex = randIndex(0, productArray.length);
   while (rightIndex === leftIndex || rightIndex === centerIndex) {
@@ -56,6 +59,8 @@ function displayProducts() {
   }
   productArray[rightIndex].displayed += 1;
   right.src = productArray[rightIndex].path;
+  right.alt = productArray[rightIndex].name;
+
 
 }
 
