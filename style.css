@@ -12,3 +12,8 @@ img {
   height: 300px;
   margin: 50px;
 }
+
+#graphBox {
+  width: 80%;
+  margin: auto;
+}
