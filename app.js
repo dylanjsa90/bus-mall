@@ -4,17 +4,16 @@ var totalClicks = 0;
 var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
+var barGraph;
 var nameChartData = [];
 var clicksChartData = [];
-// var graphDrawn = false;
-var barData = {
+var graphData = {
   labels: nameChartData,
-  dataSets: [
+  datasets: [
     {
-      data: clicksChartData
+      data: clicksChartData,
     } ]
 };
-
 var productArray = [];
 var container = document.getElementById('container');
 
@@ -31,21 +30,14 @@ function randIndex(min, max) {
 }
 
 function handleProductClick(event) {
-  console.log(event.target.id);
   if (event.target.id !== 'container') {
-    if (totalClicks <= 25) {
-      displayProducts();
-      totalClicks += 1;
-      // var imgID = event.target.id;
-      for (var i; i < productArray.length; i++) {
-        if (event.target.alt === productArray[i].name) {
-          productArray[i].clicks += 1;
-        }
+    totalClicks += 1;
+    for (var i = 0; i < productArray.length; i++) {
+      if (event.target.alt === productArray[i].productName) {
+        productArray[i].clicks += 1;
       }
-    } else {
-      buildNameData();
-      displayGraph();
     }
+    displayProducts();
   }
 }
 
@@ -56,29 +48,32 @@ function handleButtonClick(event) {
 
 function updateChartData() {
   for (var i = 0; i < productArray.length; i++) {
-    nameChartData[i] = productArray[i];
-    clicksChartData[i] = productArray[i];
+    nameChartData[i] = productArray[i].productName;
+    clicksChartData[i] = productArray[i].clicks;
   }
 }
 
 function drawGraph() {
-  var bar = document.getElementById('graph').getContext('2d');
-  barGraph = new Chart(bar, {
+  var barCanvas = document.getElementById('graph').getContext('2d');
+  barGraph = new Chart(barCanvas, {
     type: 'bar',
-    data: barData,
+    data: graphData,
     options: {
-      reponsive: false,
+      backgroundColor: 'black'
     }
   });
-
-  // graphDrawn = true;
 }
 
 function displayProducts() {
+  if (totalClicks >= 25) {
+    document.getElementById('results').hidden = false;
+  } else if (totalClicks < 25) {
+    document.getElementById('results').hidden = true;
+  }
   var leftIndex = randIndex(0, productArray.length);
   productArray[leftIndex].displayed += 1;
   left.src = productArray[leftIndex].path;
-  left.alt = productArray[leftIndex].name;
+  left.alt = productArray[leftIndex].productName;
 
   var centerIndex = randIndex(0, productArray.length);
   while (centerIndex === leftIndex) {
@@ -87,7 +82,7 @@ function displayProducts() {
   }
   productArray[centerIndex].displayed += 1;
   center.src = productArray[centerIndex].path;
-  center.alt = productArray[centerIndex].name;
+  center.alt = productArray[centerIndex].productName;
 
   var rightIndex = randIndex(0, productArray.length);
   while (rightIndex === leftIndex || rightIndex === centerIndex) {
@@ -95,7 +90,7 @@ function displayProducts() {
   }
   productArray[rightIndex].displayed += 1;
   right.src = productArray[rightIndex].path;
-  right.alt = productArray[rightIndex].name;
+  right.alt = productArray[rightIndex].productName;
 
 }
 
