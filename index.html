@@ -3,6 +3,7 @@
 <head>
   <title>Bus Mall</title>
   <link type="text/css" rel="stylesheet" href="style.css">
+  <script src="Chart.js"></script>
 </head>
   <body>
 
@@ -12,8 +13,12 @@
     <p>After 25 selections results will be viewable</p>
     <p>Please select one of the following three products you would be most likely to purchase</p>
     <div id="container">
-
+      <img id="left" src="" />
+      <img id="center" src="" />
+      <img id="right" src="" />
     </div>
+    <button id="results">Click to graph data</button>
+    <canvas id="graph"></canvas>
     <script src="app.js"></script>
   </body>
   </html>
