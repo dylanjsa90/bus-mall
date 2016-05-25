@@ -1376,11 +1376,19 @@ for (var func in conversions) {
   // export rgb2hsl and ["rgb"]["hsl"]
   convert[from] = convert[from] || {};
 
+<<<<<<< HEAD
   convert[from][to] = convert[func] = (function(func) {
     return function(arg) {
       if (typeof arg == "number")
         arg = Array.prototype.slice.call(arguments);
 
+=======
+  convert[from][to] = convert[func] = (function(func) { 
+    return function(arg) {
+      if (typeof arg == "number")
+        arg = Array.prototype.slice.call(arguments);
+      
+>>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
       var val = conversions[func](arg);
       if (typeof val == "string" || val === undefined)
         return val; // keyword
@@ -1408,12 +1416,20 @@ Converter.prototype.routeSpace = function(space, args) {
    }
    // color.rgb(10, 10, 10)
    if (typeof values == "number") {
+<<<<<<< HEAD
       values = Array.prototype.slice.call(args);
+=======
+      values = Array.prototype.slice.call(args);        
+>>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
    }
 
    return this.setValues(space, values);
 };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 /* Set the values for a space, invalidating cache */
 Converter.prototype.setValues = function(space, values) {
    this.space = space;
@@ -7248,7 +7264,11 @@ module.exports = function(Chart) {
 					fontFamily = valueOrDefault(opts.fontFamily, globalDefaults.defaultFontFamily),
 					titleFont = helpers.fontString(fontSize, fontStyle, fontFamily),
 					rotation = 0,
+<<<<<<< HEAD
 					titleX,
+=======
+					titleX, 
+>>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 					titleY;
 
 				ctx.fillStyle = valueOrDefault(opts.fontColor, globalDefaults.defaultFontColor); // render in correct colour
@@ -8178,7 +8198,11 @@ module.exports = function(Chart) {
 		},
 		inLabelRange: function(mouseX) {
 			var vm = this._view;
+<<<<<<< HEAD
 			return vm ? (Math.pow(mouseX - vm.x, 2) < Math.pow(vm.radius + vm.hitRadius, 2)) : false;
+=======
+			return vm ? (Math.pow(mouseX - vm.x, 2) < Math.pow(vm.radius + vm.hitRadius, 2)) : false; 
+>>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 		},
 		tooltipPosition: function() {
 			var vm = this._view;
@@ -8218,7 +8242,11 @@ module.exports = function(Chart) {
 
 				switch (pointStyle) {
 					// Default includes circle
+<<<<<<< HEAD
 					default:
+=======
+					default: 
+>>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 						ctx.beginPath();
 						ctx.arc(x, y, radius, 0, Math.PI * 2);
 						ctx.closePath();
@@ -8345,7 +8373,11 @@ module.exports = function(Chart) {
 				[rightX, vm.base]
 			];
 
+<<<<<<< HEAD
 			// Find first (starting) corner with fallback to 'bottom'
+=======
+			// Find first (starting) corner with fallback to 'bottom' 
+>>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 			var borders = ['bottom', 'left', 'top', 'right'];
 			var startCorner = borders.indexOf(vm.borderSkipped, 0);
 			if (startCorner === -1)
@@ -8371,8 +8403,13 @@ module.exports = function(Chart) {
 		},
 		inRange: function(mouseX, mouseY) {
 			var vm = this._view;
+<<<<<<< HEAD
 			return vm ?
 					(vm.y < vm.base ?
+=======
+			return vm ? 
+					(vm.y < vm.base ? 
+>>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 						(mouseX >= vm.x - vm.width / 2 && mouseX <= vm.x + vm.width / 2) && (mouseY >= vm.y && mouseY <= vm.base) :
 						(mouseX >= vm.x - vm.width / 2 && mouseX <= vm.x + vm.width / 2) && (mouseY >= vm.base && mouseY <= vm.y)) :
 					false;
@@ -8403,7 +8440,11 @@ module.exports = function(Chart) {
 	};
 
 	var DatasetScale = Chart.Scale.extend({
+<<<<<<< HEAD
 		// Implement this so that
+=======
+		// Implement this so that 
+>>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 		determineDataLimits: function() {
 			this.minIndex = 0;
 			this.maxIndex = this.chart.data.labels.length - 1;

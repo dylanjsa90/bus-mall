@@ -4,11 +4,12 @@ var totalClicks = 0;
 var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
-var barGraph; // Graph
-var nameChartData = []; // Graph
-var clicksChartData = []; // Graph
-var productArray = [];
 var container = document.getElementById('container');
+var productArray = [];
+
+var barGraph;
+var nameChartData = [];
+var clicksChartData = [];
 var graphData = {
   labels: nameChartData,
   datasets: [
@@ -94,11 +95,11 @@ function displayProducts() {
 
 }
 
+
 for (var i = 0; i < 20; i++) {
   productArray[i] = new Product(files[i]);
 }
 
 container.addEventListener('click', handleProductClick);
 document.getElementById('results').addEventListener('click', handleButtonClick);
-
 displayProducts();
