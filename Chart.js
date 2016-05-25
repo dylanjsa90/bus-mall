@@ -1383,11 +1383,11 @@ for (var func in conversions) {
         arg = Array.prototype.slice.call(arguments);
 
 =======
-  convert[from][to] = convert[func] = (function(func) { 
+  convert[from][to] = convert[func] = (function(func) {
     return function(arg) {
       if (typeof arg == "number")
         arg = Array.prototype.slice.call(arguments);
-      
+
 >>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
       var val = conversions[func](arg);
       if (typeof val == "string" || val === undefined)
@@ -1419,7 +1419,7 @@ Converter.prototype.routeSpace = function(space, args) {
 <<<<<<< HEAD
       values = Array.prototype.slice.call(args);
 =======
-      values = Array.prototype.slice.call(args);        
+      values = Array.prototype.slice.call(args);
 >>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
    }
 
@@ -1428,7 +1428,7 @@ Converter.prototype.routeSpace = function(space, args) {
 <<<<<<< HEAD
 
 =======
-  
+
 >>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 /* Set the values for a space, invalidating cache */
 Converter.prototype.setValues = function(space, values) {
@@ -7267,7 +7267,7 @@ module.exports = function(Chart) {
 <<<<<<< HEAD
 					titleX,
 =======
-					titleX, 
+					titleX,
 >>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 					titleY;
 
@@ -8201,7 +8201,7 @@ module.exports = function(Chart) {
 <<<<<<< HEAD
 			return vm ? (Math.pow(mouseX - vm.x, 2) < Math.pow(vm.radius + vm.hitRadius, 2)) : false;
 =======
-			return vm ? (Math.pow(mouseX - vm.x, 2) < Math.pow(vm.radius + vm.hitRadius, 2)) : false; 
+			return vm ? (Math.pow(mouseX - vm.x, 2) < Math.pow(vm.radius + vm.hitRadius, 2)) : false;
 >>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 		},
 		tooltipPosition: function() {
@@ -8245,7 +8245,7 @@ module.exports = function(Chart) {
 <<<<<<< HEAD
 					default:
 =======
-					default: 
+					default:
 >>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 						ctx.beginPath();
 						ctx.arc(x, y, radius, 0, Math.PI * 2);
@@ -8376,7 +8376,7 @@ module.exports = function(Chart) {
 <<<<<<< HEAD
 			// Find first (starting) corner with fallback to 'bottom'
 =======
-			// Find first (starting) corner with fallback to 'bottom' 
+			// Find first (starting) corner with fallback to 'bottom'
 >>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 			var borders = ['bottom', 'left', 'top', 'right'];
 			var startCorner = borders.indexOf(vm.borderSkipped, 0);
@@ -8407,8 +8407,8 @@ module.exports = function(Chart) {
 			return vm ?
 					(vm.y < vm.base ?
 =======
-			return vm ? 
-					(vm.y < vm.base ? 
+			return vm ?
+					(vm.y < vm.base ?
 >>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 						(mouseX >= vm.x - vm.width / 2 && mouseX <= vm.x + vm.width / 2) && (mouseY >= vm.y && mouseY <= vm.base) :
 						(mouseX >= vm.x - vm.width / 2 && mouseX <= vm.x + vm.width / 2) && (mouseY >= vm.base && mouseY <= vm.y)) :
@@ -8443,7 +8443,7 @@ module.exports = function(Chart) {
 <<<<<<< HEAD
 		// Implement this so that
 =======
-		// Implement this so that 
+		// Implement this so that
 >>>>>>> b4276878a42d4b1b227d95ca6675b15881cff8ea
 		determineDataLimits: function() {
 			this.minIndex = 0;
