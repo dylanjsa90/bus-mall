@@ -4,14 +4,23 @@ var totalClicks = 0;
 var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
-var barGraph;
-var nameChartData = [];
-var clicksChartData = [];
+var barGraph; // Graph
+var topGraph; // Graph
+var nameChartData = []; // Graph
+var clicksChartData = []; // Graph
+var top5GraphData = [];
 var graphData = {
   labels: nameChartData,
   datasets: [
     {
       data: clicksChartData,
+    } ]
+};
+var graphTopData = {
+  labels: nameChartData,
+  datasets: [
+    {
+      data: top5GraphData
     } ]
 };
 var productArray = [];
@@ -43,7 +52,16 @@ function handleProductClick(event) {
 
 function handleButtonClick(event) {
   updateChartData();
-  drawGraph();
+  drawGraph('graph');
+}
+
+function handleTopProductClick(event) {
+  updateChartData();
+  clicksChartData.sort(compareNumbers);
+  console.log(clicksChartData);
+  //var top5 = clicksChartData.slice(-5);
+  drawTopProductGraph('top5graph');
+
 }
 
 function updateChartData() {
@@ -51,13 +69,25 @@ function updateChartData() {
     nameChartData[i] = productArray[i].productName;
     clicksChartData[i] = productArray[i].clicks;
   }
+  top5GraphData = clicksChartData;
+  top5GraphData = top5GraphData.sort(compareNumbers).slice(-5);
 }
 
-function drawGraph() {
+function drawGraph(graphID) {
   var barCanvas = document.getElementById('graph').getContext('2d');
   barGraph = new Chart(barCanvas, {
     type: 'bar',
     data: graphData,
+    options: {
+      backgroundColor: 'black'
+    }
+  });
+}
+function drawTopProductGraph(graphID) {
+  var barCanvas = document.getElementById('top5graph').getContext('2d');
+  topGraph = new Chart(barCanvas, {
+    type: 'bar',
+    data: graphTopData,
     options: {
       backgroundColor: 'black'
     }
@@ -94,10 +124,20 @@ function displayProducts() {
 
 }
 
+function compareNumbers(a, b) {
+  return a - b;
+}
+
+// function graphTopProducts() {
+//   drawGraph
+// }
+
 for (var i = 0; i < 20; i++) {
   productArray[i] = new Product(files[i]);
 }
 
 container.addEventListener('click', handleProductClick);
 document.getElementById('results').addEventListener('click', handleButtonClick);
+document.getElementById('top5').addEventListener('click', handleTopProductClick);
+
 displayProducts();
