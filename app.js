@@ -36,6 +36,8 @@ function handleProductClick(event) {
     for (var i = 0; i < productArray.length; i++) {
       if (event.target.alt === productArray[i].productName) {
         productArray[i].clicks += 1;
+        var lsArray = JSON.stringify(productArray);
+        localStorage.setItem('productData', lsArray);
       }
     }
     displayProducts();
@@ -92,12 +94,22 @@ function displayProducts() {
   productArray[rightIndex].displayed += 1;
   right.src = productArray[rightIndex].path;
   right.alt = productArray[rightIndex].productName;
+  var lsArray = JSON.stringify(productArray);
+  localStorage.setItem('productData', lsArray);
 
 }
 
-
 for (var i = 0; i < 20; i++) {
   productArray[i] = new Product(files[i]);
+}
+
+if (localStorage.getItem('productData') !== null) {
+  var storageData = localStorage.getItem('productData');
+  storageData = JSON.parse(storageData);
+  for (var i = 0; i < storageData.length; i++) {
+    productArray[i].clicks = storageData[i].clicks;
+    productArray[i].displayed = storageData[i].displayed;
+  }
 }
 
 container.addEventListener('click', handleProductClick);
