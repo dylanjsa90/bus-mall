@@ -1,6 +1,7 @@
 body {
-  background-color: grey;
+  background-color: #252019;
   text-align: center;
+  color: #929DA4;
 }
 
 p {
@@ -12,8 +13,25 @@ img {
   height: 300px;
   margin: 50px;
 }
+#description {
+  width: 80%;
+  background-color: #3E5751;
+  margin: auto;
+  border: 5px solid black;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+}
+#container {
+  background-color: black;
+  max-width: 80%;
+  margin: auto;
+  margin-bottom: 40px;
+}
 
 #graphBox {
   width: 80%;
   margin: auto;
+  background-color: #FFFFFF;
+
 }

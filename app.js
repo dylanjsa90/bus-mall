@@ -70,8 +70,10 @@ function drawGraph() {
 function displayProducts() {
   if (totalClicks >= 25) {
     document.getElementById('results').hidden = false;
+    document.getElementById('graphBox').hidden = false;
   } else if (totalClicks < 25) {
     document.getElementById('results').hidden = true;
+    document.getElementById('graphBox').hidden = true;
   }
   var leftIndex = randIndex(0, productArray.length);
   productArray[leftIndex].displayed += 1;
