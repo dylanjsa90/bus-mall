@@ -49,6 +49,7 @@ function handleButtonClick(event) {
   document.getElementById('results').hidden = true;
   updateChartData();
   drawGraph();
+  alert('Thanks for participating');
 }
 
 function updateChartData() {
